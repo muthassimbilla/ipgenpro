@@ -45,7 +45,7 @@ export default function LoginForm() {
             <Lock className="w-8 h-8 text-white" />
           </div>
           <CardTitle className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-            Secure Access
+            IP GEN PRO
           </CardTitle>
           <p className="text-slate-600 dark:text-slate-300 mt-2">
             Enter your API key to access the proxy generator
@@ -94,7 +94,7 @@ export default function LoginForm() {
             <div className="space-y-2">
               <p>Need an API key? Contact your administrator</p>
               <p className="text-xs bg-slate-100 dark:bg-slate-800 p-2 rounded">
-                <strong>Default Admin Key:</strong> admin123
+                <strong>Unlimited IP Generator:</strong>
               </p>
             </div>
           </div>
