@@ -147,12 +147,12 @@ export default function UserProfile({ onBack }: UserProfileProps) {
   return (
     <div className="max-w-6xl mx-auto space-y-8">
       {/* Header */}
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
         <Button
           onClick={onBack}
           variant="outline"
           size="lg"
-          className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm"
+          className="w-full sm:w-auto bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm"
         >
           <ArrowLeft className="h-5 w-5 mr-2" />
           Back to Generator
