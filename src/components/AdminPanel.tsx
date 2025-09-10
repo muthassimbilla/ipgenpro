@@ -214,18 +214,18 @@ export default function AdminPanel({ onBack }: AdminPanelProps) {
   return (
     <div className="max-w-7xl mx-auto space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 w-full sm:w-auto">
           <Button
             onClick={onBack}
             variant="outline"
             size="lg"
-            className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm"
+            className="w-full sm:w-auto bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm order-1 sm:order-none"
           >
             <ArrowLeft className="h-5 w-5 mr-2" />
             Back to Generator
           </Button>
-          <div>
+          <div className="order-2 sm:order-none">
             <h1 className="text-3xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-3">
               <Shield className="h-8 w-8 text-red-600" />
               Admin Panel
@@ -237,7 +237,7 @@ export default function AdminPanel({ onBack }: AdminPanelProps) {
         </div>
         <Button
           onClick={() => setShowCreateForm(true)}
-          className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-lg"
+          className="w-full sm:w-auto bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-lg order-3 sm:order-none"
         >
           <Plus className="h-5 w-5 mr-2" />
           Create New Key
@@ -408,10 +408,10 @@ export default function AdminPanel({ onBack }: AdminPanelProps) {
                     : 'border-red-200 dark:border-red-700 bg-red-50 dark:bg-red-900/20'
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex-1">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-2">
-                      <h3 className="font-semibold text-slate-800 dark:text-slate-100">
+                      <h3 className="font-semibold text-slate-800 dark:text-slate-100 truncate">
                         {key.user_name}
                       </h3>
                       {key.is_admin && (
@@ -428,7 +428,7 @@ export default function AdminPanel({ onBack }: AdminPanelProps) {
                       </span>
                     </div>
                     
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="flex items-center gap-2 mb-2 overflow-hidden">
                       <span className="font-mono text-sm bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">
                         {showPasswords[key.id] ? key.key_value : '•'.repeat(key.key_value.length)}
                       </span>
@@ -446,7 +446,7 @@ export default function AdminPanel({ onBack }: AdminPanelProps) {
                       </Button>
                     </div>
 
-                    <div className="flex items-center gap-4 text-sm text-slate-600 dark:text-slate-400">
+                    <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600 dark:text-slate-400">
                       <span className="flex items-center gap-1">
                         <Calendar className="h-4 w-4" />
                         Created: {formatDate(key.created_at)}
@@ -460,11 +460,12 @@ export default function AdminPanel({ onBack }: AdminPanelProps) {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2 justify-start sm:justify-end">
                     <Button
                       onClick={() => startEdit(key)}
                       variant="outline"
-                      size="sm"
+                      size="sm" 
+                      className="flex-shrink-0"
                     >
                       <Edit className="h-4 w-4" />
                     </Button>
@@ -475,7 +476,7 @@ export default function AdminPanel({ onBack }: AdminPanelProps) {
                           onClick={() => toggleKeyStatus(key)}
                           variant="outline"
                           size="sm"
-                          className={key.is_active ? 'text-red-600' : 'text-emerald-600'}
+                          className={`flex-shrink-0 ${key.is_active ? 'text-red-600' : 'text-emerald-600'}`}
                         >
                           {key.is_active ? 'Deactivate' : 'Activate'}
                         </Button>
@@ -484,7 +485,7 @@ export default function AdminPanel({ onBack }: AdminPanelProps) {
                           onClick={() => handleDeleteKey(key)}
                           variant="outline"
                           size="sm"
-                          className="text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
+                          className="text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 flex-shrink-0"
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
