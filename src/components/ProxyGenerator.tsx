@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import MobileMenu from './MobileMenu';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
@@ -22,7 +23,8 @@ import {
   Zap,
   User,
   LogOut,
-  Shield
+  Shield,
+  Menu
 } from 'lucide-react';
 import { useTheme } from './hooks/useTheme';
 import { useAuth } from '../contexts/AuthContext';
@@ -85,6 +87,7 @@ export default function ProxyGenerator({ onShowProfile, onShowAdmin }: ProxyGene
   const [saveProgress, setSaveProgress] = useState(0);
   const [showCountrySuggestions, setShowCountrySuggestions] = useState(false);
   const [filteredCountries, setFilteredCountries] = useState(countries);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const findCountryCode = (countryStr: string): string | null => {
     if (!countryStr) return null;
@@ -513,7 +516,7 @@ export default function ProxyGenerator({ onShowProfile, onShowAdmin }: ProxyGene
   return (
     <div className="max-w-6xl mx-auto space-y-8">
       {/* Header with User Controls */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="flex items-center gap-4">
           <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
             Welcome, {currentUser?.user_name}
@@ -525,7 +528,20 @@ export default function ProxyGenerator({ onShowProfile, onShowAdmin }: ProxyGene
           )}
         </div>
         
-        <div className="flex items-center gap-3">
+        {/* Mobile Menu Button (visible only on small screens) */}
+        <div className="sm:hidden">
+          <Button
+            onClick={() => setIsMobileMenuOpen(true)}
+            variant="outline"
+            size="lg"
+            className="w-full bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border-slate-200 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800 shadow-lg hover:shadow-xl transition-all duration-300"
+          >
+            <Menu className="h-5 w-5" />
+          </Button>
+        </div>
+        
+        {/* Desktop Navigation (hidden on small screens) */}
+        <div className="hidden sm:flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
           <Button
             onClick={onShowProfile}
             variant="outline"
@@ -800,7 +816,7 @@ export default function ProxyGenerator({ onShowProfile, onShowAdmin }: ProxyGene
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center pt-4 border-t border-slate-200 dark:border-slate-700">
-            <div className="w-full sm:w-40">
+            <div className="w-full sm:w-32">
               <Label className="text-slate-700 dark:text-slate-300 font-medium mb-2 block">
                 Quantity
               </Label>
@@ -922,6 +938,17 @@ export default function ProxyGenerator({ onShowProfile, onShowAdmin }: ProxyGene
           </CardContent>
         </Card>
       )}
+      
+      {/* Mobile Menu */}
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+        onShowProfile={onShowProfile}
+        onShowAdmin={onShowAdmin}
+        toggleTheme={toggleTheme}
+        theme={theme}
+        mounted={mounted}
+      />
     </div>
   );
 }
