@@ -14,7 +14,7 @@ export default function LoginForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!apiKey.trim()) {
-      setError('Please enter your API key');
+      setError('Please Enter your KEY');
       return;
     }
 
@@ -48,7 +48,7 @@ export default function LoginForm() {
             IP GEN PRO
           </CardTitle>
           <p className="text-slate-600 dark:text-slate-300 mt-2">
-            Enter your API key to access the proxy generator
+            Enter your KEY to access the proxy generator
           </p>
         </CardHeader>
         <CardContent>
@@ -58,7 +58,7 @@ export default function LoginForm() {
                 <Key className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
                 <Input
                   type="password"
-                  placeholder="Enter your API key"
+                  placeholder="Enter your KEY"
                   value={apiKey}
                   onChange={(e) => setApiKey(e.target.value)}
                   className="pl-10 h-12 bg-white dark:bg-slate-700 border-2 border-slate-200 dark:border-slate-600 focus:border-blue-500 dark:focus:border-blue-400"
